@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  tg_bot:
+    build:
+      dockerfile:
+        tg_bot/Dockerfile
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    restart: always
+    volumes:
+      - ./ .database/postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=2504
+      - POSTGRES_DB=BotFit
+    ports:
+      - "5432"
