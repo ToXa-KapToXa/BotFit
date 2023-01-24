@@ -13,7 +13,7 @@ import json
 import yaml
 
 
-with open('cfg.yml') as fh:
+with open('tg_bot//cfg.yml') as fh:
     read_data = yaml.load(fh, Loader=yaml.FullLoader)
 
 updater = Updater(read_data["tg_key"], use_context=True)
@@ -29,8 +29,8 @@ def start(update, context):
     try:
         user = session.query(Users).filter(Users.tg_id == update.message.from_user.id).first()
         if not user:
-            new_user = ControlUser(user.tg_id)
-            user_class[user.tg_id] = new_user
+            new_user = ControlUser(update.message.from_user.id)
+            user_class[update.message.from_user.id] = new_user
             new_user = Users(tg_id=update.message.from_user.id, first_name=update.message.from_user.first_name)
             session.add(new_user)
             session.commit()

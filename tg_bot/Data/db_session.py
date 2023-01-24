@@ -14,7 +14,7 @@ def global_init():
     if __factory:
         return
 
-    conn_str = f'postgresql+psycopg2://postgres:2504@db:5432/BotFit'
+    conn_str = f'postgresql+psycopg2://postgres:2504@localhost:5432/BotFit'
     print(f"Подключение к базе данных по адресу {conn_str}")
 
     engine = sa.create_engine(conn_str, connect_args={'options': '-csearch_path=public'})
